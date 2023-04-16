@@ -1,20 +1,20 @@
 # Structure of IPCC reports
 The IPCC reports are heavily structured and we are including the following:
-* SRCCL - 
-* SROCCC Special Report on Oceans and the Cryosphere in a Changing Climate
-* SR1.5
-* AR6_WGI
-* AR6_WGII
-* AR6_WGIII
+* SRCCL - Special Report on Climate Change and Land
+* SROCC Special Report on Oceans and the Cryosphere in a Changing Climate
+* SR1.5 - Special Report on Global Warming of 1.5ºC
+* AR6_WGI - Sixth Assessment Report, Working Group I
+* AR6_WGII - Sixth Assessment Report, Working Group II
+* AR6_WGIII - Sixth Assessment Report, Working Group III
 
 and the recent summary / Synthesis report
-* SYR
+* SYR -- Synthesis Report
 
 Each of these can have the following components:
 * Chapters 
-* SPM
+* SPM - Summary For Policy Makers
 * TS - Technical Summary
-* ES
+* ES - Executive Summary
 * Annexes
 
 The main body of the documents is sections with paragraphs but there are also the following "floats"
