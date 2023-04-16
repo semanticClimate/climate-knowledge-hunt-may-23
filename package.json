@@ -1,0 +1,30 @@
+{
+    "WGII": {
+        "colour": "#605e14",
+        "shape": "triangle",
+        "alternateName":"WG2"
+    },
+    "WGI": {
+        "colour": "#f6ae2d",
+        "shape": "triangle",
+        "alternateName": "WG1"
+    },
+    "SRCCL": {
+        "colour": "#ee6637",
+        "shape": "dot"
+    },
+    "WGIII": {
+        "colour": "#ff9b70",
+        "shape": "dot"
+    },
+    "SROCC": {
+        "colour": "#585fcc",
+        "shape": "dot"
+    },
+    "SR15":{
+        "colour": "#eff9f0",
+        "shape": "dot",
+        "alternateName":"SR1.5"
+    }
+    
+}

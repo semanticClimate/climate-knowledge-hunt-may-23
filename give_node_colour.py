@@ -1,5 +1,11 @@
 import pandas as pd
 from pyvis.network import Network
+import json
+
+SOURCE = "source"
+TARGET = "target"
+PACKAGE = "package"
+SECTION = "section"
 
 def cleaning_nan(df, list_of_columns):
     # dropping the rows having NaN values
@@ -8,30 +14,15 @@ def cleaning_nan(df, list_of_columns):
     df = df.reset_index(drop=True)
     return df
 
-def get_package_names(df):
-    return (set(df["package"]))
-
-def give_colour(df):
+def get_package_names(df, file_name):
+    with open(file_name) as f:
+        package_dict = json.load(f)
     node_colour = []
-    for package in df['package']:
-        if package == "WGII":
-            node_colour.append('#605e14')
-        elif package == "WG1":
-            node_colour.append('#f6ae2d')
-        elif package == "WGI":
-            node_colour.append('#f6ae2d')
-        elif package == "SRCCL":
-            node_colour.append('#ee6637')
-        elif package == "WGIII":
-            node_colour.append('#ff9b70')
-        elif package == "SROCC":
-            node_colour.append('#585fcc')
-        elif package == "SR15":
-            node_colour.append("#eff9f0")
-        elif package == "SR1.5":
-            node_colour.append("#eff9f0")
-        else:
-            node_colour.append("87755d")
+    for package_extracted in df[PACKAGE]:
+        try: 
+            node_colour.append(package_dict[package_extracted]["colour"])
+        except KeyError:
+            node_colour.append("#87755d")
     df["node_colour"] = node_colour
     return df
 
@@ -56,15 +47,13 @@ def make_graph(df, source, target, colour):
         node["title"] += " Neighbors:<br>" + "<br>".join(neighbor_map[node["id"]])
         node["value"] = len(neighbor_map[node["id"]])          
     ipcc_net.show_buttons(filter_=['physics'])          
-    ipcc_net.show("ipcc_graph_coloured.html")
+    ipcc_net.show("ipcc_graph_coloured_2.html")
 
 
 
 
-ipcc_graph = pd.read_csv("knowledge_graph/edges.csv")
-cleaned_ipcc_graph = cleaning_nan(ipcc_graph, ['source', 'package','target', 'section'])
-package_names = get_package_names(cleaned_ipcc_graph)
-#print(package_names) #output: {'WGII', 'SRCCL', 'SROCC', 'WG1', 'SR1.5', 'SR15', 'WGI', 'WGIII'}
-ipcc_graph_with_coloured_nodes = give_colour(cleaned_ipcc_graph)
+ipcc_table = pd.read_csv("knowledge_graph/edges.csv")
+cleaned_ipcc_graph = cleaning_nan(ipcc_table, ['source', 'package','target', 'section'])
+ipcc_graph_with_coloured_nodes = get_package_names(cleaned_ipcc_graph, "package.json")
 ipcc_graph_with_coloured_nodes.to_csv('coloured.csv')
 make_graph(ipcc_graph_with_coloured_nodes, source='source', target='target', colour ='node_colour')
